@@ -6,7 +6,7 @@ import { monumentsData, touristPlacesData } from '@/app/history_data';
 
 const Blog = () => {
   const allBlogs = [...monumentsData, ...touristPlacesData];
-  const slicedAllBlogs = allBlogs.slice(0, 4); // Slicing the array to take the first 4 elements
+  // const slicedAllBlogs = allBlogs.slice(0, 4); 
 
   return (
     <div className="py-10 p-5 sm:p-0">
@@ -14,7 +14,7 @@ const Blog = () => {
         <Title text="Blog 📝" className="flex flex-col items-center justify-center" />
       </Link>
       <div className="grid grid-cols-1 sm:grid-cols-2 pt-20 gap-4">
-        {slicedAllBlogs.map((blog, index) => {
+        {allBlogs.map((blog, index) => {
           return (
             <Link href={`/blogs/${blog.slug}`} key={index}>
               <div className={cn('p-5 rounded-md', blog.image)}>
