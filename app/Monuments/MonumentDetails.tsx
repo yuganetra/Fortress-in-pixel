@@ -22,6 +22,7 @@ export const HoverEffectMonument = ({
   return (
     <div className={cn('grid grid-cols-1 lg:grid-cols-1 py-10 gap-8', className)}>
       {items.map((item) => (
+         <Link href={`/single_monument/${item.id}`} key={item.id}>
         <div key={item.id} className="flex items-center gap-8 p-2 h-full w-full">
           <div className="rounded-md w-full overflow-hidden bg-black group-hover:ring-2 ring-green-500 relative z-20 transition-all duration-500 cursor-pointer">
             <img src={item.imgUrl} alt={item.name} className="h-72 w-full object-cover" />
@@ -35,6 +36,7 @@ export const HoverEffectMonument = ({
             <p className="text-gray-500">Features: {item.features.join(', ')}</p>
           </div>
         </div>
+        </Link>
       ))}
     </div>
   );
