@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\fortress-in-pixels.props" />
+</Project>

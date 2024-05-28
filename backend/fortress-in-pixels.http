@@ -1,0 +1,6 @@
+@fortress_in_pixels_HostAddress = http://localhost:5121
+
+GET {{fortress_in_pixels_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
