@@ -1,3 +1,5 @@
+// app/layout.tsx
+
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -6,12 +8,12 @@ import './globals.css';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { AppProvider } from '@/providers/app-provider';
 import { Toaster } from 'sonner';
+import Navbar from './(home)/_components/Navbar';
 
 const font = Space_Grotesk({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://yuvrajsinghlodh.vercel.app/'),
-
   title: {
     template: '%s | Fortress in Pixels',
     default: 'Fortress in Pixels',
@@ -22,13 +24,10 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-
-  description:
-  "Welcome to ExploreIndia.com, your ultimate guide to the rich and diverse cultural heritage of India! Discover the magnificent monuments that showcase the architectural marvels and historical significance of this vibrant country.",
-    openGraph: {
+  description: "Welcome to ExploreIndia.com, your ultimate guide to the rich and diverse cultural heritage of India! Discover the magnificent monuments that showcase the architectural marvels and historical significance of this vibrant country.",
+  openGraph: {
     title: 'Fortress in Pixels',
-    description:
-    "Welcome to ExploreIndia.com, your ultimate guide to the rich and diverse cultural heritage of India! Discover the magnificent monuments that showcase the architectural marvels and historical significance of this vibrant country.",
+    description: "Welcome to ExploreIndia.com, your ultimate guide to the rich and diverse cultural heritage of India! Discover the magnificent monuments that showcase the architectural marvels and historical significance of this vibrant country.",
     url: 'https://yuvrajsinghlodhi.vercel.app/',
     siteName: 'Fortress in Pixels',
     images: '/project-1.png',
@@ -52,6 +51,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Navbar className="navbar-class hidden" isFooter={false} />
             {children}
             <Toaster richColors />
             <SpeedInsights />

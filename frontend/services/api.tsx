@@ -19,3 +19,7 @@ export const fetchmonumentdata = async () => {
   const response = await axios.get(`${API_URL}MyEntities/monumentdata`);
   return response.data;
 };
+export const fetchmonumentBySearch = async (query:string) => {
+  const response = await axios.get(`${API_URL}MyEntities/search?query=${query}`);
+  return response.data;
+};
