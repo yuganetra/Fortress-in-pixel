@@ -13,7 +13,9 @@ const Blog = () => {
   const [monuments, setMonuments] = useState<Monumentdata[]>([]);
   const [touristPlaces, setTouristPlaces] = useState<touristPlaces[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null
+  >(null);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +35,7 @@ const Blog = () => {
     fetchData();
   }, []);
 
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -47,7 +50,7 @@ const Blog = () => {
     <div className="py-10 p-5 sm:p-0">
       <Link href="/Blog">
         <Title text="Blog 📝" className="flex flex-col items-center justify-center" />
-      </Link>
+      </Link>         
       <div className="grid grid-cols-1 sm:grid-cols-2 pt-20 gap-4">
         {allBlogs.map((blog) => (
           <Link href={`/blogs/${blog.slug}`} key={blog.id}>
