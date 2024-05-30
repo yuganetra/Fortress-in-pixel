@@ -124,6 +124,5 @@ namespace fortress_in_pixels.Controllers
 
             return Ok(results);
         }
-
     }
 }

@@ -14,6 +14,9 @@ namespace fortress_in_pixels
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Register HttpClient
+            builder.Services.AddHttpClient();
+
             // Configure PostgreSQL connection
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<MyDbContext>(options =>

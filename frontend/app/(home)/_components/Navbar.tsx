@@ -6,7 +6,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchMonuments } from '@/services/api';
+import { fetchmonumentBySearch } from '@/services/api';
+import SearchBox from "./SearchBox";
 
 
 const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean }) => {
@@ -20,19 +21,13 @@ const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean
 
       const getMonuments = async () => {
         try {
-          const data = await fetchMonuments();
-          data.map((i: { name: any; }) => {
-            if(i.name === query){
-              console.log(i);
-            }
-          })
-  
+          const data = await fetchmonumentBySearch(query);
+          console.log(data)  
         } catch (error) {
           console.error("Failed to fetch monuments:", error);
         }
       };
       getMonuments();
-      // router.push(`/Search-results/${query}`);
     }
   };
 
@@ -57,21 +52,7 @@ const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean
         </h1>
       </Link>
       {!isFooter && (
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search"
-            className="px-4 py-2 border border-gray-300 rounded-md outline-none focus:border-green-500"
-            value={query}
-            onChange={(e) => setquery(e.target.value)}
-          />
-          <button
-            className="absolute top-1/2 transform -translate-y-1/2 bg-green-500 text-white px-4 py-2 rounded-md"
-            onClick={handleSearch}
-          >
-            Search
-          </button>
-        </div>
+        <SearchBox/>
       ) }
       <div className="flex items-center gap-5">
         {socials.map((social, index) => {
