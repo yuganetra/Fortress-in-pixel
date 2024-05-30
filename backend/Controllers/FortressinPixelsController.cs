@@ -115,9 +115,11 @@ namespace fortress_in_pixels.Controllers
             {
                 return BadRequest("Query parameter is required.");
             }
+            
+            var upperQuery = query.ToUpper();
 
             var results = await _context.Monuments
-                .Where(m => m.Name.Contains(query) || m.Description.Contains(query))
+                .Where(m => m.Name.ToUpper().Contains(upperQuery) || m.Description.ToUpper().Contains(upperQuery))
                 .ToListAsync();
 
             return Ok(results);
