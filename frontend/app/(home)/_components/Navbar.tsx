@@ -2,6 +2,8 @@
 
 import { SiBlogger } from "react-icons/si";
 import { BiBuildingHouse } from "react-icons/bi";
+import { CiLogin } from "react-icons/ci";
+
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
@@ -42,7 +44,13 @@ const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean
       Label: "Blog",
       Icon: SiBlogger,
     },
+    {
+      Link: "/Login",
+      Label: "Login",
+      Icon: CiLogin ,
+    },
   ];
+
 
   return (
     <nav className={cn("py-8 flex items-center justify-between animate-move-down", className)}>
