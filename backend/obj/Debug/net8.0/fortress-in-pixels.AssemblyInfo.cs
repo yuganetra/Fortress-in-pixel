@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fortress-in-pixels")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8ed047be4af9e023a8596fae63a730d78eb732e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed63c0832ba60339e2e8558ffd03f2904cb4c0f1")]
 [assembly: System.Reflection.AssemblyProductAttribute("fortress-in-pixels")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fortress-in-pixels")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
