@@ -4,6 +4,8 @@ using fortress_in_pixels.Data;
 using fortress_in_pixels.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace fortress_in_pixels.Controllers
 {
@@ -108,21 +110,97 @@ namespace fortress_in_pixels.Controllers
             return CreatedAtAction(nameof(GetTouristPlace), new { id = touristPlace.Title }, touristPlace);
         }
 
+        //[HttpGet("search")]
+        //public async Task<IActionResult> SearchMonuments(string query)
+        //{
+        //    if (string.IsNullOrEmpty(query))
+        //    {
+        //        return BadRequest("Query parameter is required.");
+        //    }
+
+        //    var upperQuery = query.ToUpper();
+
+        //    var results = await _context.Monuments
+        //        .Where(m => m.Name.ToUpper().Contains(upperQuery) || m.Description.ToUpper().Contains(upperQuery))
+        //        .ToListAsync();
+
+        //    return Ok(results);
+        //}
         [HttpGet("search")]
-        public async Task<IActionResult> SearchMonuments(string query)
+        public async Task<IActionResult> Search(string query)
         {
             if (string.IsNullOrEmpty(query))
             {
                 return BadRequest("Query parameter is required.");
             }
-            
+
             var upperQuery = query.ToUpper();
 
-            var results = await _context.Monuments
+            // Search in local database
+            var localResults = await _context.Monuments
                 .Where(m => m.Name.ToUpper().Contains(upperQuery) || m.Description.ToUpper().Contains(upperQuery))
                 .ToListAsync();
 
-            return Ok(results);
+            if (localResults.Any())
+            {
+                return Ok(localResults);
+            }
+            else
+            {
+                int limit = 1; // Maximum number of results
+
+                // If no results found in the local database, search using Wikimedia API
+                var encodedQuery = Uri.EscapeDataString(query);
+                var apiUrl = $"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={encodedQuery}&format=json";
+                string searchUrl = $"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={encodedQuery}+monument&srprop=snippet&format=json";
+
+                using (var httpClient = new HttpClient())
+                {
+                    var searchResponse = await httpClient.GetAsync(searchUrl);
+                    var searchContent = await searchResponse.Content.ReadAsStringAsync();
+
+                    // Parse JSON response for search
+                    JObject searchJson = JObject.Parse(searchContent);
+                    var searchResults = searchJson["query"]["search"];
+
+                    var Monument = new List<Monument>(); // Create a list to store Monument objects
+
+                    foreach (var result in searchResults)
+                    {
+                        int pageId = (int)result["pageid"];
+                        string title = result["title"].ToString();
+
+                        // Construct URL to fetch full article content
+                        string articleUrl = $"https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages&exintro=true&explaintext=true&piprop=original&pageids={pageId}&format=json";
+                        var articleResponse = await httpClient.GetAsync(articleUrl);
+                        var articleContent = await articleResponse.Content.ReadAsStringAsync();
+                        JObject articleJson = JObject.Parse(articleContent);
+
+                        if (articleJson["query"]?["pages"]?[pageId.ToString()]?["original"]?["source"] != null)
+                        {
+                            // Extract the image URL
+                            string snippet = result["snippet"].ToString();
+                            string snippetWithoutHtml = Regex.Replace(snippet, "<.*?>", string.Empty);
+
+                            string articleExtract = articleJson["query"]["pages"][pageId.ToString()]["extract"].ToString();
+                            string imageUrl = articleJson["query"]["pages"][pageId.ToString()]["original"]["source"].ToString();
+
+                            // Create Monument object and add it to the list
+                            Monument place = new Monument
+                            {
+                                Id = pageId,
+                                Name = title,
+                                Description = articleExtract,
+                                ImgUrl = imageUrl,
+                            };
+
+                            Monument.Add(place); // Add Monument object to the list
+                        }
+                    }
+
+                    return Ok(Monument); // Return the list of Monument objects
+                }
+            }
         }
     }
 }

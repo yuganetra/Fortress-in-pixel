@@ -15,9 +15,9 @@ export default function HeroSection() {
         </p>
         <Link href={"https://mail.google.com/mail/?view=cm&to=yuvrajsinghlodhi@gmail.com"} className="inline-block group -rotate-[3deg]" target="_blank">
             <div>
-                <h1 className="text-3xl font-bold group-hover:text-green-400 transition-all ">Contact Us 📬</h1>
-                <div className="w-40 h-2 rounded bg-green-500"></div>
-                <div className="w-40 h-2 rounded bg-indigo-500 translate-x-2"></div>
+                <h1 className="text-3xl font-bold group-hover:text-customBrownlight transition-all ">Contact Us 📬</h1>
+                <div className="w-40 h-2 rounded bg-customBrownlight"></div>
+                <div className="w-40 h-2 rounded bg-customBrown translate-x-2"></div>
             </div>
         </Link>
       </div>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fortress-in-pixels")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b55d94b226f5c95d6a7a3c8d361009d453aa8c07")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96d649b1c1b2ee1e70559410e54ef40ee72a88f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("fortress-in-pixels")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fortress-in-pixels")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
