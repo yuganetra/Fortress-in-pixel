@@ -25,6 +25,8 @@ const config = {
     },
     extend: {
       colors: {
+        customBrown: '#3a2317',
+        customBrownlight:'#a87e62',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

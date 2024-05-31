@@ -55,7 +55,7 @@ const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean
   return (
     <nav className={cn("py-8 flex items-center justify-between animate-move-down", className)}>
       <Link href="/">
-        <h1 className="text-2xl font-bold underline underline-offset-8 decoration-green-500 -rotate-2">
+        <h1 className="text-2xl font-bold underline underline-offset-8 decoration-customBrownlight -rotate-2">
           Fortress in Pixels
         </h1>
       </Link>
