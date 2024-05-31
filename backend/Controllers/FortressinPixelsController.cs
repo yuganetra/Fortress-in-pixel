@@ -110,22 +110,6 @@ namespace fortress_in_pixels.Controllers
             return CreatedAtAction(nameof(GetTouristPlace), new { id = touristPlace.Title }, touristPlace);
         }
 
-        //[HttpGet("search")]
-        //public async Task<IActionResult> SearchMonuments(string query)
-        //{
-        //    if (string.IsNullOrEmpty(query))
-        //    {
-        //        return BadRequest("Query parameter is required.");
-        //    }
-
-        //    var upperQuery = query.ToUpper();
-
-        //    var results = await _context.Monuments
-        //        .Where(m => m.Name.ToUpper().Contains(upperQuery) || m.Description.ToUpper().Contains(upperQuery))
-        //        .ToListAsync();
-
-        //    return Ok(results);
-        //}
         [HttpGet("search")]
         public async Task<IActionResult> Search(string query)
         {
@@ -201,6 +185,43 @@ namespace fortress_in_pixels.Controllers
                     return Ok(Monument); // Return the list of Monument objects
                 }
             }
+        }
+
+        [HttpPost("signup")]
+        public async Task<ActionResult<User>> Signup(User user)
+        {
+            // Check if the email is already registered
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (existingUser != null)
+            {
+                return Conflict("User already exists");
+            }
+
+            // Add the user to the database
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Login), new { email = user.Email }, user);
+        }
+
+        // POST method for user login
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Login(User user)
+        {
+            // Find the user by email
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (existingUser == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Check if the password matches
+            if (existingUser.PasswordHash != user.PasswordHash)
+            {
+                return BadRequest("Incorrect password");
+            }
+
+            return Ok(existingUser);
         }
     }
 }

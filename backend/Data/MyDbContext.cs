@@ -10,5 +10,6 @@ namespace fortress_in_pixels.Data
         public DbSet<Monument> Monuments { get; set; }
         public DbSet<MonumentData> MonumentsData { get; set; }
         public DbSet<TouristPlace> TouristPlaces { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
