@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { SiBlogger } from "react-icons/si";
 import { BiBuildingHouse } from "react-icons/bi";
@@ -8,11 +8,16 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchmonumentBySearch } from '@/services/api';
+import { fetchmonumentBySearch } from "@/services/api";
 import SearchBox from "./SearchBox";
 
-
-const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean }) => {
+const Navbar = ({
+  className,
+  isFooter,
+}: {
+  className?: string;
+  isFooter: boolean;
+}) => {
   const [query, setquery] = useState("");
 
   const router = useRouter();
@@ -24,7 +29,7 @@ const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean
       const getMonuments = async () => {
         try {
           const data = await fetchmonumentBySearch(query);
-          console.log(data)  
+          console.log(data);
         } catch (error) {
           console.error("Failed to fetch monuments:", error);
         }
@@ -47,21 +52,23 @@ const Navbar = ({ className, isFooter }: { className?: string; isFooter: boolean
     {
       Link: "/Login",
       Label: "Login",
-      Icon: CiLogin ,
+      Icon: CiLogin,
     },
   ];
 
-
   return (
-    <nav className={cn("py-8 flex items-center justify-between animate-move-down", className)}>
+    <nav
+      className={cn(
+        "py-8 flex items-center justify-between animate-move-down",
+        className
+      )}
+    >
       <Link href="/">
         <h1 className="text-2xl font-bold underline underline-offset-8 decoration-green-500 -rotate-2">
           Fortress in Pixels
         </h1>
       </Link>
-      {!isFooter && (
-        <SearchBox/>
-      ) }
+      {!isFooter && <SearchBox />}
       <div className="flex items-center gap-5">
         {socials.map((social, index) => {
           const Icon = social.Icon;
