@@ -13,7 +13,7 @@ import Navbar from './(home)/_components/Navbar';
 const font = Space_Grotesk({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yuvrajsinghlodh.vercel.app/'),
+  metadataBase: new URL('https://yuvrajsinghlodh/fortress-in-pixels.vercel.app/'),
   title: {
     template: '%s | Fortress in Pixels',
     default: 'Fortress in Pixels',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fortress in Pixels',
     description: "Welcome to ExploreIndia.com, your ultimate guide to the rich and diverse cultural heritage of India! Discover the magnificent monuments that showcase the architectural marvels and historical significance of this vibrant country.",
-    url: 'https://yuvrajsinghlodhi.vercel.app/',
+    url: 'https://yuvrajsinghlodh/fortress-in-pixels.vercel.app/',
     siteName: 'Fortress in Pixels',
     images: '/project-1.png',
     type: 'website',

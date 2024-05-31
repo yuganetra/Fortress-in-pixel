@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import SearchBox from "./SearchBox";
 import { useEffect, useState } from "react";
 import { onAuthChange, logout } from "@/services/auth";
-import { User } from "firebase/auth"; // Import the User type from Firebase
+import { User } from "firebase/auth"; 
 
 const Navbar = ({
   className,
@@ -17,14 +17,12 @@ const Navbar = ({
   className?: string;
   isFooter: boolean;
 }) => {
-  const [user, setUser] = useState<User | null>(null); // Use the User type from Firebase
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Listen for auth state changes
     const unsubscribe = onAuthChange((currentUser) => {
       setUser(currentUser);
     });
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 

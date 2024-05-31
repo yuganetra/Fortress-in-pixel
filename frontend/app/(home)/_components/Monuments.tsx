@@ -15,7 +15,6 @@ import { fetchMonuments } from '@/services/api';
   features: string[];
 }
 
-
 const Monuments = () => {
   const [monuments, setMonuments] = useState<Monument[]>([]);
 

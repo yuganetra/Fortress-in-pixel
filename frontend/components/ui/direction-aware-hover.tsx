@@ -111,7 +111,7 @@ export const DirectionAwareHover = ({
             )}
           >
             <div>
-              <p>{children}</p>
+              <div>{children}</div>
               <p className="text-sm text-gray-400">{location}</p>
             </div>
           </motion.div>

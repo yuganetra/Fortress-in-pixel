@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { fetchMonumentBySearch } from "@/services/api";
 import { useSearchParams } from "next/navigation";
@@ -23,7 +24,6 @@ const SearchPage = () => {
     const getMonuments = async () => {
       try {
         const data = await fetchMonumentBySearch(query);
-        console.log(data);
         setSearchResults(data);
       } catch (error) {
         console.error("Failed to fetch monuments:", error);

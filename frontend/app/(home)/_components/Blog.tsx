@@ -52,8 +52,8 @@ const Blog = () => {
         <Title text="Blog 📝" className="flex flex-col items-center justify-center" />
       </Link>         
       <div className="grid grid-cols-1 sm:grid-cols-2 pt-20 gap-4">
-        {allBlogs.map((blog) => (
-          <Link href={`/Blog/${blog.slug}`} key={blog.id}>
+        {allBlogs.map((blog,index) => (
+          <Link href={`/Blog/${blog.slug}`} key={index}>
             <div className={cn('p-5 rounded-md', blog.image)}>
               <DirectionAwareHover imageUrl={blog.image} className="w-full" location={blog.location}>
                 <div className="space-y-4 bg-blend-darken">

@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Navbar from '@/app/(home)/_components/Navbar'; 
 import { fetchMonumentById } from '@/services/api';
-import { Monument } from '@/types/types'; // Import the Monument interface
+import { Monument } from '@/types/types'; 
 
 const MonumentDetails = () => {
   const params = useParams();
