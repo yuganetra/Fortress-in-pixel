@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "@/app/(home)/_components/Navbar";
 import Link from "next/link";
-import Blog from "@/app/(home)/_components/Blog";
+import Blog from "../../(home)/_components/Blog";
 export default function page() {
   return (
     <div className="min-h-screen bg-black overflow-hidden">

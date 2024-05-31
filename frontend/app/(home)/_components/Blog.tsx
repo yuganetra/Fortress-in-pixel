@@ -5,7 +5,7 @@ import Title from './Title';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { DirectionAwareHover } from '@/components/ui/direction-aware-hover';
-import { fetchmonumentdata, fetchTouristPlaces } from '@/services/api';
+import { fetchMonumentData, fetchTouristPlaces } from '@/services/api';
 import { Monumentdata } from '@/types/monumentdata';
 import { touristPlaces } from '@/types/touristPlaces';
 
@@ -21,7 +21,7 @@ const Blog = () => {
     const fetchData = async () => {
       try {
         const [monumentData, touristPlaceData] = await Promise.all([
-          fetchmonumentdata(),
+          fetchMonumentData(),
           fetchTouristPlaces(),
         ]);
         setMonuments(monumentData);
@@ -53,7 +53,7 @@ const Blog = () => {
       </Link>         
       <div className="grid grid-cols-1 sm:grid-cols-2 pt-20 gap-4">
         {allBlogs.map((blog) => (
-          <Link href={`/blogs/${blog.slug}`} key={blog.id}>
+          <Link href={`/Blog/${blog.slug}`} key={blog.id}>
             <div className={cn('p-5 rounded-md', blog.image)}>
               <DirectionAwareHover imageUrl={blog.image} className="w-full" location={blog.location}>
                 <div className="space-y-4 bg-blend-darken">

@@ -1,15 +1,14 @@
-"use client";
+'use client';
 
 import { SiBlogger } from "react-icons/si";
 import { BiBuildingHouse } from "react-icons/bi";
-import { CiLogin } from "react-icons/ci";
-
+import { CiLogin, CiUser } from "react-icons/ci";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { fetchmonumentBySearch } from "@/services/api";
 import SearchBox from "./SearchBox";
+import { useEffect, useState } from "react";
+import { onAuthChange, logout } from "@/services/auth";
+import { User } from "firebase/auth"; // Import the User type from Firebase
 
 const Navbar = ({
   className,
@@ -18,30 +17,21 @@ const Navbar = ({
   className?: string;
   isFooter: boolean;
 }) => {
-  const [query, setquery] = useState("");
+  const [user, setUser] = useState<User | null>(null); // Use the User type from Firebase
 
-  const router = useRouter();
-
-  const handleSearch = () => {
-    if (query.trim()) {
-      console.log(query);
-
-      const getMonuments = async () => {
-        try {
-          const data = await fetchmonumentBySearch(query);
-          console.log(data);
-        } catch (error) {
-          console.error("Failed to fetch monuments:", error);
-        }
-      };
-      getMonuments();
-    }
-  };
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = onAuthChange((currentUser) => {
+      setUser(currentUser);
+    });
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   const socials = [
     {
       Link: "/Monuments",
-      Label: "Monuments ",
+      Label: "Monuments",
       Icon: BiBuildingHouse,
     },
     {
@@ -49,11 +39,21 @@ const Navbar = ({
       Label: "Blog",
       Icon: SiBlogger,
     },
-    {
-      Link: "/Login",
-      Label: "Login",
-      Icon: CiLogin,
-    },
+    user
+      ? {
+          Link: "#",
+          Label: "Logout",
+          Icon: CiUser,
+          onClick: async () => {
+            await logout();
+            setUser(null);
+          },
+        }
+      : {
+          Link: "/Login",
+          Label: "Login",
+          Icon: CiLogin,
+        },
   ];
 
   return (
@@ -70,9 +70,19 @@ const Navbar = ({
       </Link>
       {!isFooter && <SearchBox />}
       <div className="flex items-center gap-5">
+        {user && <span className="text-white">Hello, {user.displayName}</span>}
         {socials.map((social, index) => {
           const Icon = social.Icon;
-          return (
+          return social.Link === "#" ? (
+            <button
+              key={index}
+              onClick={social.onClick}
+              aria-label={social.Label}
+              className="size-5 hover:scale-125 transition-all"
+            >
+              <Icon />
+            </button>
+          ) : (
             <Link href={social.Link} aria-label={social.Label} key={index}>
               <Icon className="size-5 hover:scale-125 transition-all" />
             </Link>

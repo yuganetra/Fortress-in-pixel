@@ -1,5 +1,5 @@
 "use client";
-import { fetchmonumentBySearch } from "@/services/api";
+import { fetchMonumentBySearch } from "@/services/api";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "../(home)/_components/Navbar";
@@ -20,10 +20,9 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState<Item[]>([]);
 
   useEffect(() => {
-    // Fetch search results from an API
     const getMonuments = async () => {
       try {
-        const data = await fetchmonumentBySearch(query);
+        const data = await fetchMonumentBySearch(query);
         console.log(data);
         setSearchResults(data);
       } catch (error) {

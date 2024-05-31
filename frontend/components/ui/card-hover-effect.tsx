@@ -53,7 +53,7 @@ export const HoverEffect = ({
                   />
                 )}
               </AnimatePresence>
-              <div className="rounded-md w-full overflow-hidden bg-black group-hover:ring-2 ring-green-500 relative z-20 transition-all duration-500 cursor-pointer">
+              <div className="rounded-md w-full overflow-hidden bg-black group-hover:ring-2 ring-customBrownlight relative z-20 transition-all duration-500 cursor-pointer">
                 <div className="py-10 z-50 relative space-y-5">
                 <img src={item.imgUrl} alt={item.name} className="mx-auto h-72 w-96" />
                   <div className="text-center">

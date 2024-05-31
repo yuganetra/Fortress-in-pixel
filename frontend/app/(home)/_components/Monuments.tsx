@@ -1,13 +1,23 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import Title from './Title';
 import { HoverEffect } from '@/components/ui/card-hover-effect';
 import Link from 'next/link';
 import { fetchMonuments } from '@/services/api';
 
+ interface Monument {
+  id: number;
+  name: string;
+  imgUrl: string;
+  desc: string;
+  location: string;
+  builtYear: string;
+  style: string;
+  features: string[];
+}
+
+
 const Monuments = () => {
-  const [monuments, setMonuments] = useState([]);
+  const [monuments, setMonuments] = useState<Monument[]>([]);
 
   useEffect(() => {
     const getMonuments = async () => {
