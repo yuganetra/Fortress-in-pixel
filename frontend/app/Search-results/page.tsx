@@ -1,5 +1,5 @@
+'use client';
 /* eslint-disable @next/next/no-img-element */
-"use client";
 import { fetchMonumentBySearch } from "@/services/api";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -24,7 +24,6 @@ export const fetchMonumentData = async () => {
 
 export const fetchMonumentBySearch = async (query: any) => {
   const response = await axios.get(`${API_URL}MyEntities/search?query=${query}`);
-  console.log(response.data);
   return response.data;
 };
 

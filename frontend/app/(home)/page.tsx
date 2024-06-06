@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import HeroSection from './_components/HeroSection';
 import Navbar from './_components/Navbar';
 import Monuments from './_components/Monuments';
