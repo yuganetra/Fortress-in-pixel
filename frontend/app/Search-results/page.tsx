@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { fetchMonumentBySearch } from "@/services/api";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 import Navbar from "../(home)/_components/Navbar";
 
 interface Item {
@@ -36,7 +36,7 @@ const SearchPage = () => {
   }, [query]);
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <div className="min-h-screen bg-black  overflow-hidden">
         <div className="dark:bg-black bg-white dark:bg-grid-white/[0.05] bg-grid-black/[0.2] relative">
           <div className="max-w-7xl mx-auto p-5">
@@ -89,7 +89,7 @@ const SearchPage = () => {
         </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 };
 
